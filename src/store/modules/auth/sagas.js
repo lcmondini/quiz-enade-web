@@ -15,8 +15,6 @@ export function* signIn({ payload }) {
       password,
     });
 
-    console.tron.error('passou aqui 2');
-
     const { token, user } = response.data;
 
     if (!user.coordinator) {
@@ -37,18 +35,15 @@ export function* signIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, password } = payload;
-
-    console.tron.error('chegou aqui');
+    const { name, course, email, password } = payload;
 
     yield call(api.post, 'users', {
       name,
+      course,
       email,
       password,
-      provider: true,
+      coordinator: true,
     });
-
-    console.tron.error('chegou aqui 2');
 
     history.push('/');
   } catch (err) {

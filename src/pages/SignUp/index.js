@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 
 import { signUpRequest } from '~/store/modules/auth/actions';
 
-import logo from '~/assets/logo.svg';
+import logo from '~/assets/logo-lasalle-shield.png';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('O nome é obrigatório'),
@@ -16,21 +16,23 @@ const schema = Yup.object().shape({
   password: Yup.string()
     .min(6, 'A senha dever ter no mínimo 6 caracteres')
     .required('A senha é obrigatória'),
+  course: Yup.string().required('O curso é obrigatório'),
 });
 
 export default function SignUp() {
   const dispatch = useDispatch();
 
-  function handleSubmit({ name, email, password }) {
-    dispatch(signUpRequest(name, email, password));
+  function handleSubmit({ name, course, email, password }) {
+    dispatch(signUpRequest(name, course, email, password));
   }
 
   return (
     <>
-      <img src={logo} alt="GoBarber" />
+      <img src={logo} alt="Lasalle" />
 
       <Form schema={schema} onSubmit={handleSubmit}>
         <Input name="name" placeholder="Nome completo" />
+        <Input name="course" placeholder="Curso" />
         <Input name="email" type="email" placeholder="Seu e-mail" />
         <Input
           name="password"

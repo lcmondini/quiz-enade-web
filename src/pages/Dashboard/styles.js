@@ -14,7 +14,7 @@ export const Container = styled.div`
     align-items: center;
 
     button {
-      width: 100%;
+      width: 200px;
       margin: 10px 0 0;
       height: 44px;
       background: #3b9eff;
@@ -46,7 +46,7 @@ export const Question = styled.li`
 
   strong {
     display: block;
-    color: #7159c1;
+    color: #02509e;
     font-size: 20px;
     font-weight: normal;
   }
@@ -60,6 +60,6 @@ export const Question = styled.li`
 
   a {
     font-weight: bold;
-    color: #7159c1;
+    color: #02509e;
   }
 `;

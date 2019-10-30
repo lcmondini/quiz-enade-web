@@ -1,12 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
+// eslint-disable-next-line
 import api from '~/services/api';
 
 import { Container } from './styles';
 
-export default function Question() {
+export default function Question({ isAuthed }) {
   console.tron.error(window.location.pathname);
+  console.tron.error(isAuthed);
   const dispatch = useDispatch();
 
   function handleSubmit() {
@@ -32,3 +35,7 @@ export default function Question() {
     </Container>
   );
 }
+
+Question.propTypes = {
+  isAuthed: PropTypes.bool.isRequired,
+};
