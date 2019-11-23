@@ -37,7 +37,7 @@ export default function SignUp() {
         <Input
           name="password"
           type="password"
-          placeholder="Seu senha secreta"
+          placeholder="Sua senha secreta"
         />
 
         <button type="submit">Criar conta</button>

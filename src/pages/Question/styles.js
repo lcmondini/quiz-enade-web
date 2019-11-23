@@ -32,13 +32,6 @@ export const Container = styled.div`
       padding: 15px;
     }
 
-    span {
-      color: #fb6f91;
-      align-self: flex-start;
-      margin: 0 0 10px;
-      font-weight: bold;
-    }
-
     hr {
       border: 0;
       height: 1px;
@@ -49,7 +42,7 @@ export const Container = styled.div`
     button {
       margin: 5px 0 0;
       height: 44px;
-      background: #3b9eff;
+      background: #f3c014;
       font-weight: bold;
       color: #fff;
       border: 0;
@@ -58,7 +51,7 @@ export const Container = styled.div`
       transition: background 0.2s;
 
       &:hover {
-        background: ${darken(0.03, '#3b9eff')};
+        background: ${darken(0.03, '#f3c014')};
       }
     }
   }
@@ -67,7 +60,7 @@ export const Container = styled.div`
     width: 100%;
     margin: 10px 0 0;
     height: 44px;
-    background: #f64c75;
+    background: #ea4335;
     font-weight: bold;
     color: #fff;
     border: 0;
@@ -76,7 +69,7 @@ export const Container = styled.div`
     transition: background 0.2s;
 
     &:hover {
-      background: ${darken(0.08, '#f64c75')};
+      background: ${darken(0.08, '#ea4335')};
     }
   }
 `;

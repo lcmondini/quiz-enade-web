@@ -17,11 +17,7 @@ export default function Routes() {
 
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
-      <Route
-        path="/question"
-        component={() => <Question isAuthed />}
-        isPrivate
-      />
+      <Route path="/question" component={Question} isPrivate />
     </Switch>
   );
 }

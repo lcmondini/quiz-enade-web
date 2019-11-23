@@ -24,9 +24,12 @@ export default function Profile() {
   return (
     <Container>
       <Form initialData={profile} onSubmit={handleSubmit}>
+        {/* Verificar por que está travando
         <AvatarInput name="avatar_id" />
+        */}
         <Input name="name" placeholder="Nome completo" />
         <Input type="email" name="email" placeholder="Seu endereço de e-mail" />
+        <Input name="course" placeholder="Curso" />
 
         <hr />
 
