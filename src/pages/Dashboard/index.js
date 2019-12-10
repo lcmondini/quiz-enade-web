@@ -1,67 +1,115 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { Input } from '@rocketseat/unform';
 import api from '~/services/api';
 
-import { Container, Question } from './styles';
+import { Container, Question, Button, Footer } from './styles';
 
 export default function Dashboard() {
   const [questions, setQuestions] = useState([]);
   const [pagination, setPagination] = useState([]);
+  const [reload, setReload] = useState();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [searchPage, setSearchPage] = useState(0);
+  const [lastPage, setLastPage] = useState(0);
+  const [keyword, setKeyword] = useState();
   const profile = useSelector(state => state.user.profile);
 
   useEffect(() => {
     async function loadQuestions() {
+      if (searchPage === 0) {
+        setSearchPage(1);
+      }
       const response = await api.get('questions', {
         params: {
           limit: 10,
           course: profile.course,
+          page: searchPage,
+          keyword,
         },
       });
 
+      setReload(false);
       setQuestions(response.data.questions);
       setPagination(response.data.pagination);
+      setCurrentPage(response.data.pagination.currentPage);
+      setSearchPage(response.data.pagination.currentPage);
+      setLastPage(response.data.pagination.endPage);
     }
     loadQuestions();
-  }, [profile.course]);
+  }, [currentPage, keyword, profile.course, reload, searchPage]);
 
-  function handleQuestion() {}
+  async function handleDelete(id) {
+    try {
+      await api.delete(`questions/${id}`);
+
+      setReload(true);
+
+      toast.success('Questão excluída com sucesso!');
+    } catch (err) {
+      toast.error('Erro ao excluir questão, favor verificar!');
+    }
+  }
+
+  function handlePage(pageNumber) {
+    if (
+      pageNumber >= pagination.startPage &&
+      pageNumber <= pagination.endPage
+    ) {
+      setCurrentPage(pageNumber);
+      setSearchPage(pageNumber);
+    }
+  }
+
+  function handleKeyword() {
+    setKeyword(document.getElementById('keyword').value);
+  }
 
   return (
     <Container>
       <header>
         <Link to="/question">
-          <button type="button">Cadastrar nova pergunta</button>
+          <button type="button">Cadastrar nova questão</button>
         </Link>
+        <Input
+          id="keyword"
+          name="keyword"
+          placeholder="Palavra-chave filtro"
+          onBlur={() => handleKeyword()}
+        />
       </header>
 
       <ul>
         {questions.map(question => (
-          <Question key={question.id} onClick={handleQuestion}>
+          <Question key={question.id}>
             <strong>{question.description}</strong>
-            <span>{question.correct_answer}</span>
+            <span>{question.keyword}</span>
             <Link to={`/question?id=${question.id}`}>ALTERAR</Link>
+            <Button type="button" onClick={() => handleDelete(question.id)}>
+              EXCLUIR
+            </Button>
           </Question>
         ))}
       </ul>
-      <div className="card-footer pb-0 pt-3">
-        {pagination.pages && pagination.pages.length && (
-          <ul className="pagination">
-            {pagination.pages.map(page => (
-              <li
-                key={page}
-                className={`page-item number-item ${
-                  pagination.currentPage === page ? 'active' : ''
-                }`}
-              >
-                <Link to={{ search: `?page=${page}` }} className="page-link">
-                  {page}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <Footer>
+        <Button
+          type="button"
+          onClick={() => handlePage(parseInt(currentPage, 10) - 1)}
+        >
+          &laquo;
+        </Button>
+        <strong>{currentPage}</strong>
+        <strong>de</strong>
+        <strong>{lastPage}</strong>
+        <Button
+          type="button"
+          onClick={() => handlePage(parseInt(currentPage, 10) + 1)}
+        >
+          &raquo;
+        </Button>
+      </Footer>
     </Container>
   );
 }

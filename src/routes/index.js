@@ -8,6 +8,7 @@ import SignUp from '../pages/SignUp';
 import Dashboard from '../pages/Dashboard';
 import Profile from '../pages/Profile';
 import Question from '../pages/Question';
+import Chat from '../pages/Chat';
 
 export default function Routes() {
   return (
@@ -18,6 +19,7 @@ export default function Routes() {
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
       <Route path="/question" component={Question} isPrivate />
+      <Route path="/chat" component={Chat} isPrivate />
     </Switch>
   );
 }

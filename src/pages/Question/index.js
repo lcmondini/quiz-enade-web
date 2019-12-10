@@ -27,7 +27,7 @@ export default function Question(props) {
         },
       });
 
-      setQuestions(response.data);
+      setQuestions(response.data.questions);
     }
     loadQuestions();
   }, [id]);
@@ -77,10 +77,9 @@ export default function Question(props) {
         await api.put('questions', request);
       }
 
-      toast.success('Pergunta atualizada com sucesso!');
+      toast.success('Questão atualizada com sucesso!');
     } catch (err) {
-      console.tron.error(err);
-      toast.error('Erro ao atualizar pergunta, confira seus dados!');
+      toast.error('Erro ao atualizar questão, confira seus dados!');
     }
   }
 
@@ -106,5 +105,5 @@ export default function Question(props) {
 }
 
 Question.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.instanceOf(Object).isRequired,
 };

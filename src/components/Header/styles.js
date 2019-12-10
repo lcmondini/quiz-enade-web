@@ -26,6 +26,9 @@ export const Content = styled.div`
     a {
       font-weight: bold;
       color: #02509e;
+      margin-right: 20px;
+      padding-right: 20px;
+      border-right: 1px solid #eee;
     }
   }
 

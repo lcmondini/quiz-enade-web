@@ -60,7 +60,7 @@ export const Container = styled.div`
     width: 100%;
     margin: 10px 0 0;
     height: 44px;
-    background: #ea4335;
+    background: #e81e1e;
     font-weight: bold;
     color: #fff;
     border: 0;
@@ -69,7 +69,7 @@ export const Container = styled.div`
     transition: background 0.2s;
 
     &:hover {
-      background: ${darken(0.08, '#ea4335')};
+      background: ${darken(0.08, '#E81E1E')};
     }
   }
 `;
