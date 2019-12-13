@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Input } from '@rocketseat/unform';
-import api from '~/services/api';
 
-import { Container, Question, Button, Footer } from './styles';
+import api from '~/services/api';
+import history from '~/services/history';
+
+import { Container, Question, Update, Delete, Button, Footer } from './styles';
 
 export default function Dashboard() {
   const [questions, setQuestions] = useState([]);
@@ -67,11 +69,22 @@ export default function Dashboard() {
     setKeyword(document.getElementById('keyword').value);
   }
 
+  function handleChange(question) {
+    if (question.correct_answer !== null) {
+      history.push(`/question?id=${question.id}`);
+    } else {
+      history.push(`/essay?id=${question.id}`);
+    }
+  }
+
   return (
     <Container>
       <header>
         <Link to="/question">
-          <button type="button">Cadastrar nova questão</button>
+          <button type="button">Cadastrar Multipla Escolha</button>
+        </Link>
+        <Link to="/essay">
+          <button type="button">Cadastrar Discursiva</button>
         </Link>
         <Input
           id="keyword"
@@ -86,10 +99,12 @@ export default function Dashboard() {
           <Question key={question.id}>
             <strong>{question.description}</strong>
             <span>{question.keyword}</span>
-            <Link to={`/question?id=${question.id}`}>ALTERAR</Link>
-            <Button type="button" onClick={() => handleDelete(question.id)}>
+            <Update type="button" onClick={() => handleChange(question)}>
+              ALTERAR
+            </Update>
+            <Delete type="button" onClick={() => handleDelete(question.id)}>
               EXCLUIR
-            </Button>
+            </Delete>
           </Question>
         ))}
       </ul>

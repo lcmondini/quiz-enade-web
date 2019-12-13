@@ -12,15 +12,9 @@ import { Container } from './styles';
 const schema = Yup.object().shape({
   description: Yup.string().required('A descrição é obrigatória'),
   keyword: Yup.string().required('A palavra-chave é obrigatória'),
-  correct_answer: Yup.string().required('A resposta correta é obrigatória'),
-  option_a: Yup.string().required('A alternativa A é obrigatória'),
-  option_b: Yup.string().required('A alternativa B é obrigatória'),
-  option_c: Yup.string().required('A alternativa C é obrigatória'),
-  option_d: Yup.string().required('A alternativa D é obrigatória'),
-  option_e: Yup.string().required('A alternativa E é obrigatória'),
 });
 
-export default function Question(props) {
+export default function Essay(props) {
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState([]);
   const profile = useSelector(state => state.user.profile);
@@ -57,16 +51,7 @@ export default function Question(props) {
 
   async function handleSubmit(data) {
     try {
-      const {
-        keyword,
-        description,
-        correct_answer,
-        option_a,
-        option_b,
-        option_c,
-        option_d,
-        option_e,
-      } = data;
+      const { keyword, description } = data;
 
       const { course } = profile;
 
@@ -75,12 +60,6 @@ export default function Question(props) {
         course,
         keyword,
         description,
-        correct_answer,
-        option_a,
-        option_b,
-        option_c,
-        option_d,
-        option_e,
       };
 
       if (id == null) {
@@ -100,15 +79,8 @@ export default function Question(props) {
       <Form schema={schema} initialData={question} onSubmit={handleSubmit}>
         <Input name="description" placeholder="Enunciado" multiline />
         <Input name="keyword" placeholder="Palavra-chave" />
-        <Input name="correct_answer" placeholder="Alternativa Correta" />
 
         <hr />
-
-        <Input name="option_a" placeholder="Alternativa A" />
-        <Input name="option_b" placeholder="Alternativa B" />
-        <Input name="option_c" placeholder="Alternativa C" />
-        <Input name="option_d" placeholder="Alternativa D" />
-        <Input name="option_e" placeholder="Alternativa E" />
 
         <button type="submit">Salvar</button>
       </Form>
@@ -116,6 +88,6 @@ export default function Question(props) {
   );
 }
 
-Question.propTypes = {
+Essay.propTypes = {
   location: PropTypes.instanceOf(Object).isRequired,
 };

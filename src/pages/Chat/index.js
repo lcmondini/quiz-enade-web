@@ -10,12 +10,6 @@ const mapStateToProps = state => ({
   profile: state.user.profile,
 });
 
-function setUid(value) {
-  this.uid = value;
-}
-function getUid() {
-  return this.uid;
-}
 // retrieve the messages from the Backend
 function loadMessages(callback, course) {
   this.messagesRef = firebase.database().ref(course);
@@ -27,7 +21,7 @@ function loadMessages(callback, course) {
       text: message.text,
       createdAt: new Date(message.createdAt),
       user: {
-        _id: message.user._id,
+        id: message.user.id,
         name: message.user.name,
       },
     });
@@ -36,6 +30,7 @@ function loadMessages(callback, course) {
 }
 // send the message to the Backend
 function sendMessage(message) {
+  console.log(message);
   for (let i = 0; i < message.length; i++) {
     this.messagesRef.push({
       text: message[i].text,
@@ -55,10 +50,11 @@ class Chat extends Component {
     messages: [],
   };
   uid = '';
-  messagesRef = null;
   // initialize Firebase Backend
   constructor() {
     super();
+    loadMessages = loadMessages.bind(this);
+    sendMessage = sendMessage.bind(this);
     if (!firebase.apps.length) {
       firebase.initializeApp({
         apiKey: 'AIzaSyDZTOXOT2waYz2dNTQiYjGGMdcPeZmVlpQ',
@@ -80,6 +76,10 @@ class Chat extends Component {
     }, this.props.profile.course);
   }
 
+  componentWillMount() {
+    this.messagesRef = null;
+  }
+
   render() {
     return (
       <GiftedChat
@@ -89,7 +89,7 @@ class Chat extends Component {
           sendMessage(message);
         }}
         user={{
-          _id: this.props.profile.id,
+          id: this.props.profile.id,
           name: this.props.profile.name,
         }}
       />
