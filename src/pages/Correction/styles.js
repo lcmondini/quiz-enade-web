@@ -78,11 +78,25 @@ export const Question = styled.li`
     color: #666;
     padding-bottom: 10px;
   }
+`;
 
-  a {
-    font-weight: bold;
-    color: #02509e;
-  }
+export const Update = styled.button`
+  border: none;
+  background-color: inherit;
+  font-weight: bold;
+  color: #02509e;
+  cursor: pointer;
+  display: inline-block;
+`;
+
+export const Delete = styled.button`
+  border: none;
+  background-color: inherit;
+  padding-left: 14px;
+  font-weight: bold;
+  color: #e81e1e;
+  cursor: pointer;
+  display: inline-block;
 `;
 
 export const Button = styled.button`
