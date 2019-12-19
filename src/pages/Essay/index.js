@@ -5,6 +5,8 @@ import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
+import ImageInput from '~/components/ImageInput';
+
 import api from '~/services/api';
 
 import { Container } from './styles';
@@ -77,6 +79,8 @@ export default function Essay(props) {
   return (
     <Container>
       <Form schema={schema} initialData={question} onSubmit={handleSubmit}>
+        <ImageInput name="image_id" />
+
         <Input name="description" placeholder="Enunciado" multiline />
         <Input name="keyword" placeholder="Palavra-chave" />
 

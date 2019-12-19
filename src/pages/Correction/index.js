@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { Input } from '@rocketseat/unform';
 
 import api from '~/services/api';
 import history from '~/services/history';
 
-import { Container, Question, Update, Delete, Button, Footer } from './styles';
+import { Container, Question, Update, Button, Footer } from './styles';
 
 export default function Correction() {
   const [questions, setQuestions] = useState([]);
@@ -42,18 +40,6 @@ export default function Correction() {
     }
     loadQuestions();
   }, [currentPage, keyword, profile.course, reload, searchPage]);
-
-  async function handleDelete(id) {
-    try {
-      await api.delete(`questions/${id}`);
-
-      setReload(true);
-
-      toast.success('Questão excluída com sucesso!');
-    } catch (err) {
-      toast.error('Erro ao excluir questão, favor verificar!');
-    }
-  }
 
   function handlePage(pageNumber) {
     if (
