@@ -10,6 +10,30 @@ export const Container = styled.div`
     flex-direction: column;
     margin-top: 30px;
 
+    label {
+      margin-bottom: 15px;
+      align-self: center;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
+
+      img {
+        height: 250px;
+        width: 250px;
+        border-radius: 10px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        background: #eee;
+        align-self: center;
+      }
+
+      input {
+        display: none;
+      }
+    }
+
     input,
     textarea {
       background: rgba(0, 0, 0, 0.1);

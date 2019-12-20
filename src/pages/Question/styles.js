@@ -5,30 +5,33 @@ export const Container = styled.div`
   max-width: 600px;
   margin: 50px auto;
 
-  label {
-    cursor: pointer;
-
-    &:hover {
-      opacity: 0.7;
-    }
-
-    img {
-      height: 250px;
-      width: 600px;
-      border-radius: 10px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      background: #eee;
-    }
-
-    input {
-      display: none;
-    }
-  }
-
   form {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
+
+    label {
+      margin-bottom: 15px;
+      align-self: center;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
+
+      img {
+        height: 250px;
+        width: 250px;
+        border-radius: 10px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        background: #eee;
+      }
+
+      input {
+        display: none;
+      }
+    }
 
     input,
     textarea {
